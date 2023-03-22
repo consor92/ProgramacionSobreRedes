@@ -5,3 +5,4 @@
 .project
 .settings/org.eclipse.m2e.core.prefs
 .settings/org.eclipse.jdt.core.prefs
+target/classes/META-INF/maven/ar.edu.et32/FlujoDeDatos/pom.properties
