@@ -12,8 +12,8 @@ public class main {
 
 	public static void main(String[] args) {
 				
-		EntradaDeDatos entrada = new EntradaDeDatos();
-
+		//EntradaDeDatos entrada = new EntradaDeDatos();
+		colecciones listas = new colecciones();
 	}
 
 }
