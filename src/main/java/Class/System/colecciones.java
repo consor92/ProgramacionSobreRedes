@@ -29,23 +29,22 @@ public class colecciones {
 		ps.println( frutas.size() );
 		
 		frutas.get(0); // devuelve manzana
+	
+		ps.println( frutas.get(  frutas.size()-1 ) );
 		
 		//elimina
 		//frutas.remove( 0 );
 		
-		//frutas.set( 10 , "naranja");
-		//frutas.get( 10 );
-		//frutas.get( 5 );
-		
 		ps.println( frutas.get(  frutas.size()-1 ) );
+		
 		
 		frutas.contains("Melon");
 		frutas.indexOf("frutilla");
 		frutas.isEmpty();
-		frutas.clear();
+		//frutas.clear();
 		frutas.toArray(); //frutas[] = { "" , "" , ...}
 		
-		for( int i = 0 ; i <= frutas.size() ; i++ )
+		for( int i = 0 ; i < frutas.size() ; i++ )
 		{
 			frutas.get(i);
 		}
