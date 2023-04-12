@@ -1,0 +1,8 @@
+/.metadata/
+FlujoDeDatos/.classpath
+FlujoDeDatos/.project
+FlujoDeDatos/.settings/org.eclipse.jdt.apt.core.prefs
+FlujoDeDatos/.settings/org.eclipse.jdt.core.prefs
+FlujoDeDatos/.settings/org.eclipse.m2e.core.prefs
+FlujoDeDatos/target/classes/META-INF/MANIFEST.MF
+FlujoDeDatos/target/classes/META-INF/maven/ar.edu.et32/FlujoDeDatos/pom.properties
