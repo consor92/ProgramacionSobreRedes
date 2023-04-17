@@ -1,8 +1,10 @@
 package Readers;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.Reader;
 
@@ -33,7 +35,6 @@ public class ProbandoClassReader {
 		InputStreamReader isr = new InputStreamReader( System.in );
 		
 		try {
-			
 			ps.println( (char)isr.read() );
 			
 		} catch (IOException e) {
@@ -45,8 +46,9 @@ public class ProbandoClassReader {
 		
 		BufferedReader br = new BufferedReader( isr );
 		
+		
 		try {
-			isr.reset();
+			//isr.reset();
 			ps.println("Esto lo lee con un BUFFERED");
 			ps.println(  br.readLine()  );
 		} catch (IOException e) {
@@ -73,8 +75,6 @@ public class ProbandoClassReader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		
 		return cadena;
-		
 	}
 }
