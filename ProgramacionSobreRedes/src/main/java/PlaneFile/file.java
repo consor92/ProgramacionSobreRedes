@@ -27,6 +27,7 @@ public class file {
 	FileWriter fw;
 	PrintStream ps;
 
+	
 	public file() {
 		ps = new PrintStream(System.out );
 		error = new File("errores.log");
