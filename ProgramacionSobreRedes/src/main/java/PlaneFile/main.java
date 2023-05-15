@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package PlaneFile;
 
 import java.io.File;
@@ -7,8 +10,19 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.System.Logger;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class main.
+ *
+ * @author Redes-Profesor
+ */
 public class main {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 
 		file archivo = new file();

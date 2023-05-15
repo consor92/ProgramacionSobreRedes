@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package PlaneFile;
 
 import java.io.BufferedReader;
@@ -11,6 +14,10 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class file.
+ */
 public class file {
 
 	/*
@@ -23,11 +30,19 @@ public class file {
 	 * Collection String
 	 */
 
+	/** The error. */
 	File error;
+	
+	/** The fw. */
 	FileWriter fw;
+	
+	/** The ps. */
 	PrintStream ps;
 
 	
+	/**
+	 * Instantiates a new file.
+	 */
 	public file() {
 		ps = new PrintStream(System.out );
 		error = new File("errores.log");
@@ -48,6 +63,9 @@ public class file {
 		
 	}
 
+	/**
+	 * Crear con print stream.
+	 */
 	public void CrearConPrintStream() {
 
 		try {
@@ -72,6 +90,9 @@ public class file {
 
 	}
 
+	/**
+	 * Crear con printer.
+	 */
 	public void CrearConPrinter() {
 
 		PrintWriter pw = new PrintWriter(fw);
@@ -88,6 +109,9 @@ public class file {
 
 	}
 
+	/**
+	 * Crear con buffered.
+	 */
 	public void CrearConBuffered() {
 
 		BufferedWriter bw = new BufferedWriter(fw);
@@ -119,6 +143,11 @@ public class file {
 	}
 
 	
+	/**
+	 * Leer con buffered.
+	 *
+	 * @return the string
+	 */
 	public String LeerConBuffered()
 	{
 		String texto="";
