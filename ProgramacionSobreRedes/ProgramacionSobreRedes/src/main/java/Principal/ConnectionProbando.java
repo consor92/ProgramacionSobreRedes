@@ -6,18 +6,23 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class ConnectionProbando {
 
 	Connection conn = null;
 	PreparedStatement ps = null;
-	
+
 	public ConnectionProbando()
 	{
-		
+
 		//  CONEXION CON DB
 		try {	
-			Class.forName( "com.mysql.cj.jdbc.Driver" ) ;
+			Class.forName( "com.mysql.cj.jdbc.Driver" );
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -33,7 +38,7 @@ public class ConnectionProbando {
 		
 		PrintStream consola = new PrintStream( System.out);
 		String consulta = "SELECT * from empleado ";
-				
+		
 		try {
 			ps = conn.prepareStatement( consulta );
 			
@@ -41,9 +46,14 @@ public class ConnectionProbando {
 			
 			ResultSet rs = ps.executeQuery();
 		
+			/*
+			 * id nombre apellido rol
+			 * 5   jkjk     jkjk   1  
+			 * 8   kkjkk    iooi   2  <-
+			 */
 			// id nombre apellido rol
 			while( rs.next() )
-			{
+			{					
 				consola.println( rs.getInt("id") );
 				consola.println( rs.getString("nombre") );
 				consola.println( rs.getString("apellido") );
@@ -57,13 +67,14 @@ public class ConnectionProbando {
 			
 			consulta = "INSERT INTO empleado (id,nombre,apellido,rol) VALUES (? , ? , ? , ?)";
 			ps = conn.prepareStatement( consulta );
-			ps.setInt(1, 4);
+			ps.setInt(1, 6);
 			ps.setString(2, "Pedro");
 			ps.setString(3, "Martinez");
 			ps.setInt(4, 4);
 			
-			ps.executeUpdate();
+			consola.println( ps.executeUpdate() );
 			
+			conn.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
