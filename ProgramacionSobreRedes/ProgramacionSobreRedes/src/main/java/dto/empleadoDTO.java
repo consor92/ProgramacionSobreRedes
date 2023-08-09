@@ -2,12 +2,17 @@ package dto;
 
 import java.util.Objects;
 
-public class empleadoDTO {
+public class empleadoDTO implements generalDTO {
 
 	private int id;
 	private String nombre;
 	private String apellido;
 	private int rol;
+	
+	public empleadoDTO()
+	{
+		
+	}
 	
 	public empleadoDTO(int id, String nombre, String apellido, int rol) {
 		this.id = id;

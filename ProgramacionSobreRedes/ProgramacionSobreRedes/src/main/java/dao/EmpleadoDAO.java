@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
+import dto.DTOfactory;
 import dto.empleadoDTO;
+import dto.generalDTO;
 
 public class EmpleadoDAO {
 	// Muy parecido a hacer CRUD pero para un solo DTO (osea tabla)
@@ -63,7 +65,7 @@ public class EmpleadoDAO {
 		return aux;		
 	}
 	
-	public empleadoDTO getEmpleado(int id)
+	public generalDTO getEmpleado(int id)
 	{
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -93,8 +95,8 @@ public class EmpleadoDAO {
 		}finally {
 			cerrarConexiones(rs , ps, conn);
 		}
-		
-		return new empleadoDTO(0, null, null, 0);
+	
+		return DTOfactory.getInstance().getDTO("empleado" , rs );
 	}
 	
 	private void cerrarConexiones(ResultSet rs, PreparedStatement ps, Connection conn)
