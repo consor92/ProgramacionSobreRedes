@@ -3,8 +3,7 @@ package dto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-//patron SINGLENTON
-//nos asegura una unica instancia de un objeto
+
 public class DTOfactory {
 
 	private static DTOfactory factory = null;
@@ -12,7 +11,9 @@ public class DTOfactory {
 
 	private DTOfactory() {
 	}
-
+	
+	//patron SINGLENTON
+	//nos asegura una unica instancia de un objeto
 	public static DTOfactory getInstance() {
 		if (factory == null)
 			factory = new DTOfactory();
@@ -26,7 +27,6 @@ public class DTOfactory {
 		try {
 			switch (type) {
 			case "empleado":
-
 				dto = new empleadoDTO(rs.getInt("id"), rs.getString("nombre"), rs.getString("dni"), rs.getInt("rol"));
 				break;
 			case "rrhh":

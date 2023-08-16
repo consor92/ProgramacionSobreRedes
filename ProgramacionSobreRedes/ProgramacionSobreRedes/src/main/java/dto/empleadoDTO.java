@@ -72,7 +72,6 @@ public class empleadoDTO implements generalDTO {
 	public int hashCode() {
 		return Objects.hash(apellido, id, nombre, rol);
 	}
-	
 
 	@Override
 	public boolean equals(Object obj) {
