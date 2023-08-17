@@ -4,23 +4,57 @@
 	<artifactId>ProgramacionSobreRedes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>DB_Patrones</name>
-	
+
 	<properties>
 		<maven.compiler.version>17</maven.compiler.version>
 		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
-	
-	
+
+
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.33</version>
 		</dependency>
-		
+
+
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-javadoc-plugin</artifactId>
+			<version>3.5.0</version>
+			<type>maven-plugin</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.16</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
-	
-	
-	
+
+
+<build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-javadoc-plugin</artifactId>
+			<executions>
+				<execution>
+					<id>attach-javadocs</id>
+					<goals>
+						<goal>jar</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+	</build>
+
+
 </project>

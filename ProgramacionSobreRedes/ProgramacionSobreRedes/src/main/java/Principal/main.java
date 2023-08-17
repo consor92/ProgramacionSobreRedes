@@ -2,7 +2,10 @@ package Principal;
 
 import java.io.IOException;
 
+import dao.EmpleadoDAO;
 import dto.DTOfactory;
+import dto.empleadoDTO;
+import dto.tabla;
 
 public class main {
 
@@ -10,9 +13,11 @@ public class main {
 		// TODO Auto-generated method stub
 		
 		
-		ConnectionProbando DB = new ConnectionProbando();
+		//ConnectionProbando DB = new ConnectionProbando();
 		
-
+		EmpleadoDAO datos = new EmpleadoDAO();
+		
+		datos.addEmpleado( (empleadoDTO)DTOfactory.getInstance().getDTO(tabla.EMPLEADO) );
 		
 	}
 

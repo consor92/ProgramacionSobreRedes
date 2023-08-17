@@ -14,17 +14,52 @@ import java.util.logging.Logger;
 import dto.DTOfactory;
 import dto.empleadoDTO;
 import dto.generalDTO;
+import dto.tabla;
 
+/**
+ * 
+ * @author Gonza
+ *
+ *         Esta Class tiene por funcionalidad contener los Metodos de accedo a
+ *         datos (CRUD/ABM/AMBL) a una tabla especifica EMPLEADOS representada
+ *         por los objetos de la clase {@link dto.empleadoDTO} siguiendo el
+ *         patron de diseño DAO.
+ * 
+ *         Al final de estos metodos clasicos se generan los especificos para
+ *         consultas con parametros punales.
+ */
 public class EmpleadoDAO {
-	// Muy parecido a hacer CRUD pero para un solo DTO (osea tabla)
 
-	// agregar
-	public void addEmpleado(empleadoDTO empleado) {
+	/**
+	 * El LOG lo usaremos para mostrar los errores por pantalla en vez del
+	 * {@link System#err}.
+	 * 
+	 */
+	final Logger LOG = Logger.getLogger(empleadoDTO.class.getName());
+
+	/**
+	 * Metodo para el alta de un empleado
+	 * 
+	 * @param empleado recibe un Objeto de tipo {@link dto.empleadoDTO} el cual lo
+	 *                 impacta a la DB.
+	 * @return 0 = si no pudo cargar los datos 1 = si pudo cargar el dato.
+	 */
+	public int addEmpleado(empleadoDTO empleado) {
 		PreparedStatement ps = null;
 		Connection conn = null;
 
 		try {
 
+			/**
+			 * Los objetos de la clase {@link java.lang.StringBuilder} trabaja bajo un
+			 * patron de dideño BUILDER el cual nos permiten ir contruyendo un objeto de a
+			 * poco confome tegamos la informacion para completarlos, en este caso para
+			 * construir una cadana de texto {@link String}.
+			 * 
+			 * Su principal conpetidor de versiones anteriores de Java es el StringBuffer
+			 * que cumple con la misma funcionalidad, con la diferencia que este no se puede
+			 * SINCRONIZAR para el acceso multiple cuando trabajemos con THREAD.
+			 */
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("INSERT INTO empleado").append("(nombre, apellido, rol)").append(" VALUES ");
@@ -33,34 +68,44 @@ public class EmpleadoDAO {
 			sql.append(empleado.getApellido()).append(", ");
 			sql.append(empleado.getRol()).append(");  ");
 
+			/**
+			 * Este sector devera ser remplazado por el uso de un FACTORY que nos
+			 * proporcione {@link db.ConnectionFactory}.
+			 */
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", "root", "");
 			ps = conn.prepareStatement(sql.toString());
 
-			ps.executeUpdate();
+			return ps.executeUpdate();
 		} catch (SQLException ex) {
-			Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+			LOG.log(Level.SEVERE,
+					"INDICE CON ERROR:".concat(String.valueOf(empleado.getId())).concat(" - TABLA: EMPLEDO"), ex);
 		} finally {
 			try {
 				ps.close();
 				conn.close();
 			} catch (SQLException ex) {
-				Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+				LOG.log(Level.SEVERE, null, ex);
 			}
-
 		}
-
+		return 0;
 	}
 
 	/*
 	 * metodo para agregar muchos pero reutilizando el metodo de agregar 1 public
-	 * void addEmpleado(LinkedList<empleadoDTO> lista) { StringBuilder sql = new
-	 * StringBuilder();
+	 * void addEmpleado(LinkedList<empleadoDTO> lista) {
 	 * 
 	 * for (empleadoDTO r : lista) { this.addEmpleado(r); } }
 	 */
 
-	// agregar muchos
-	public void addEmpleado(LinkedList<empleadoDTO> lista) {
+	/**
+	 * Metodo para dar de alta a muchos empleados recibidos por una lista
+	 * 
+	 * @param lista una coleccion {@link java.util.LinkedList } de objetos empleados
+	 *              del tipo {@link dto.empleadoDTO}
+	 * @return 0 = si no pudo cargar los datos >1 = si pudo cargar los dato y
+	 *         cuantos
+	 */
+	public int addEmpleado(LinkedList<empleadoDTO> lista) {
 		PreparedStatement ps = null;
 		Connection conn = null;
 
@@ -78,50 +123,62 @@ public class EmpleadoDAO {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", "root", "");
 			ps = conn.prepareStatement(sql.toString());
 
-			ps.executeUpdate();
+			return ps.executeUpdate();
 		} catch (SQLException ex) {
-			Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+			LOG.log(Level.SEVERE, null, ex);
 		} finally {
 			try {
 				ps.close();
 				conn.close();
 			} catch (SQLException ex) {
-				Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+				LOG.log(Level.SEVERE, null, ex);
 			}
-
 		}
-
+		return 0;
 	}
 
-	// borrar uno
-	public void borrar(empleadoDTO aBorrar) {
+	/**
+	 * Metodo para dar de baja a un empleado
+	 * 
+	 * @param aBorrar objeto de tipo {@link dto.empleadoDTO} a impactar en el DB
+	 * @return -1 = si no pudo borrar ningun dato 1 = si pudo borrar los dato
+	 */
+	public int borrar(empleadoDTO aBorrar) {
 		PreparedStatement ps = null;
 		Connection conn = null;
 
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("DELETE FROM empleado ").append(" WHERE ").append(" id=? ");
-			
+
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", "root", "");
 			ps = conn.prepareStatement(sql.toString());
-			ps.setInt(1, aBorrar.getId() );
-			
-			ps.executeUpdate();
+			ps.setInt(1, aBorrar.getId());
+
+			return ps.executeUpdate();
 		} catch (SQLException ex) {
-			Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+			LOG.log(Level.SEVERE,
+					"INDICE CON ERROR:".concat(String.valueOf(aBorrar.getId())).concat(" - TABLA: EMPLEDO"), ex);
 		} finally {
 			try {
 				ps.close();
 				conn.close();
 			} catch (SQLException ex) {
-				Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+				LOG.log(Level.SEVERE, null, ex);
 			}
-
 		}
+		return -1;
 	}
 
-	// borrar varios
-	public void borrar(LinkedList<empleadoDTO> aBorrar) {
+	/**
+	 * Metodo para dar de baja a muchos empleados recibidos por una lista
+	 * 
+	 * @param aBorrar una coleccion {@link java.util.LinkedList } de objetos
+	 *                empleados del tipo {@link dto.empleadoDTO}
+	 * @return 0 = si no pudo cargar los datos >1 = si pudo borrar los dato y
+	 *         cuantos
+	 */
+	public int borrar(LinkedList<empleadoDTO> aBorrar) {
 		PreparedStatement ps = null;
 		Connection conn = null;
 
@@ -142,57 +199,121 @@ public class EmpleadoDAO {
 				ps.setInt(i++, r.getId());
 			}
 
-			ps.executeUpdate();
+			return ps.executeUpdate();
 		} catch (SQLException ex) {
-			Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+			LOG.log(Level.SEVERE, null, ex);
 		} finally {
 			try {
 				ps.close();
 				conn.close();
 			} catch (SQLException ex) {
-				Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+				LOG.log(Level.SEVERE, null, ex);
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * Metodo para modificar un empleados recibido
+	 * 
+	 * @param registro una coleccion {@link java.util.LinkedList } de objetos
+	 *                 empleados del tipo {@link dto.empleadoDTO}
+	 * @return 0 = si no pudo modificar los datos 1 = si pudo modificar los dato
+	 */
+	public int update(empleadoDTO registro) {
+		PreparedStatement ps = null;
+		Connection conn = null;
+
+		try {
+			String consulta = "UPDATE empleado SET nombre=? , apellido=? , rol=? WHERE id=?";
+
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", "root", "");
+			ps = conn.prepareStatement(consulta);
+
+			ps.setString(1, registro.getNombre());
+			ps.setString(2, registro.getApellido());
+			ps.setInt(3, registro.getRol());
+			ps.setInt(4, registro.getId());
+
+			return ps.executeUpdate();
+		} catch (SQLException ex) {
+			LOG.log(Level.SEVERE,
+					"INDICE CON ERROR:".concat(String.valueOf(registro.getId())).concat(" - TABLA: EMPLEDO"), ex);
+		} finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException ex) {
+				LOG.log(Level.SEVERE, null, ex);
+			}
+		}
+		return -1;
+	}
+
+	// actualizar muchos
+	/*
+	 * public void update(LinkedList<empleadoDTO> registro) { for (empleadoDTO r :
+	 * registro) { this.update(r); } }
+	 */
+
+	/**
+	 * Metodo para modificar a muchos empleados recibidos por una lista
+	 * 
+	 * @param registro una coleccion {@link java.util.LinkedList } de objetos
+	 *                 empleados del tipo {@link dto.empleadoDTO}
+	 * @return -1 = si no pudo modificar los datos >1 = si pudo modificar los dato y
+	 *         cuantos
+	 */
+	public int update(LinkedList<empleadoDTO> registro) {
+		PreparedStatement ps = null;
+		Connection conn = null;
+
+		try {
+			StringBuilder sql = new StringBuilder();
+			for (empleadoDTO r : registro) {
+				sql.append("UPDATE empleado").append(" SET ");
+				sql.append(" nombre = '").append(r.getNombre()).append("', ");
+				sql.append(" apellido = '").append(r.getApellido()).append("', ");
+				sql.append(" rol = ").append(r.getRol());
+
+				sql.append(" where id=?").append(";  ");
 			}
 
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", "root", "");
+			ps = conn.prepareStatement(sql.toString());
+
+			int index = 1;
+			for (empleadoDTO r : registro) {
+				ps.setInt(index++, r.getId());
+			}
+
+			return ps.executeUpdate();
+		} catch (SQLException ex) {
+			LOG.log(Level.SEVERE, null, ex);
+		} finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException ex) {
+				LOG.log(Level.SEVERE, null, ex);
+			}
 		}
+		return -1;
 	}
 
-	// actualizar
-	public void update( empleadoDTO registro) {
-        PreparedStatement ps = null;
-        Connection con = null;
-        
-        try {
-            String consulta = "UPDATE {?empleado} SET nombre=? , dni=? , fecha=? WHERE id=?";
-            
-            con = ConexionesFactory.getInstance().getConection();
-            ps = con.prepareStatement(consulta); 
-            
-            ps.setString(1, registro.getNombre() );
-            ps.setString(2, registro.getDni());
-            ps.setDate(3, registro.getFecha());
-            ps.setInt(4, registro.getId());
-            
-            ps.executeUpdate();  
-        } catch (SQLException ex) {
-            Logger.getLogger(clienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            try {
-                ps.close();
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(clienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }     
-	}
-	
-	// obtener todo
+	/**
+	 * Metodo para obtener todos los empleados en las DB
+	 * 
+	 * @return una {@link java.util.LinkedList} de objetos con tipo
+	 *         {@link dto.empleadoDTO} que representasn todos los registro en la DB
+	 *         de empleados
+	 */
 	public LinkedList<empleadoDTO> getAll() {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		LinkedList<empleadoDTO> aux = new LinkedList<>();
+		LinkedList<empleadoDTO> aux = new LinkedList<empleadoDTO>();
 
 		String sql = "SELECT * FROM empleado";
 
@@ -207,7 +328,7 @@ public class EmpleadoDAO {
 						rs.getInt("rol")));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		} finally {
 			cerrarConexiones(rs, ps, conn);
 		}
@@ -215,7 +336,13 @@ public class EmpleadoDAO {
 		return aux;
 	}
 
-	// obtener uno
+	/**
+	 * Metodo para obtener empleados existentes
+	 * 
+	 * @param id valor identificatorio como PK en la DB de empleados
+	 * @return objeto de la clase {@link dto.empleadoDTO} representando un registro
+	 *         de la DB
+	 */
 	public empleadoDTO getEmpleado(int id) {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -232,10 +359,10 @@ public class EmpleadoDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				return (empleadoDTO) DTOfactory.getInstance().getDTO("empleado", rs);
+				return (empleadoDTO) DTOfactory.getInstance().getDTO(tabla.EMPLEADO, rs);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		} finally {
 			cerrarConexiones(rs, ps, conn);
 		}
@@ -251,7 +378,7 @@ public class EmpleadoDAO {
 			if (conn != null)
 				conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOG.log(Level.SEVERE, null, e);
 		}
 	}
 

@@ -10,6 +10,7 @@ public class DTOfactory {
 	private generalDTO dto = null;
 
 	private DTOfactory() {
+		super();
 	}
 	
 	//patron SINGLENTON
@@ -23,13 +24,13 @@ public class DTOfactory {
 
 	// interface nombre = new classConcreta();
 	// Patron FACTORY
-	public generalDTO getDTO(String type, ResultSet rs) {
+	public generalDTO getDTO(tabla type, ResultSet rs) {
 		try {
 			switch (type) {
-			case "empleado":
+			case EMPLEADO:
 				dto = new empleadoDTO(rs.getInt("id"), rs.getString("nombre"), rs.getString("dni"), rs.getInt("rol"));
 				break;
-			case "rrhh":
+			case RRHH:
 				dto = new rrhhDTO();
 				break;
 			}
@@ -43,12 +44,12 @@ public class DTOfactory {
 
 	// interface nombre = new classConcreta();
 	// Patron FACTORY
-	public generalDTO getDTO(String type) {
+	public generalDTO getDTO(tabla type) {
 		switch (type) {
-		case "empleado":
+		case EMPLEADO:
 			dto = new empleadoDTO();
 			break;
-		case "rrhh":
+		case RRHH:
 			dto = new rrhhDTO();
 			break;
 		}
