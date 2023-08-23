@@ -5,16 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dto.DTOfactory;
 import dto.empleadoDTO;
-import dto.generalDTO;
-import dto.tabla;
 
 /**
  * 
@@ -90,6 +86,8 @@ public class EmpleadoDAO {
 		return 0;
 	}
 
+	
+	
 	/*
 	 * metodo para agregar muchos pero reutilizando el metodo de agregar 1 public
 	 * void addEmpleado(LinkedList<empleadoDTO> lista) {
@@ -97,6 +95,8 @@ public class EmpleadoDAO {
 	 * for (empleadoDTO r : lista) { this.addEmpleado(r); } }
 	 */
 
+	
+	
 	/**
 	 * Metodo para dar de alta a muchos empleados recibidos por una lista
 	 * 
@@ -369,6 +369,9 @@ public class EmpleadoDAO {
 		return null;
 	}
 
+	
+	
+	
 	private void cerrarConexiones(ResultSet rs, PreparedStatement ps, Connection conn) {
 		try {
 			if (rs != null)

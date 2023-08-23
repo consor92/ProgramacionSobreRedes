@@ -1,11 +1,9 @@
 package Principal;
 
-import java.io.IOException;
-
 import dao.EmpleadoDAO;
 import dto.DTOfactory;
 import dto.empleadoDTO;
-import dto.tabla;
+import dao.tabla;
 
 public class main {
 
