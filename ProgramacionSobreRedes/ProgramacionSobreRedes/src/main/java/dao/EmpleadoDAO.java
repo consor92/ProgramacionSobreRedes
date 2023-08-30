@@ -24,7 +24,7 @@ import dto.empleadoDTO;
  *         Al final de estos metodos clasicos se generan los especificos para
  *         consultas con parametros punales.
  */
-public class EmpleadoDAO implements GeneralDAO{
+public class EmpleadoDAO implements GeneralDAO<empleadoDTO>{
 
 	/**
 	 * El LOG lo usaremos para mostrar los errores por pantalla en vez del
@@ -40,7 +40,8 @@ public class EmpleadoDAO implements GeneralDAO{
 	 *                 impacta a la DB.
 	 * @return 0 = si no pudo cargar los datos 1 = si pudo cargar el dato.
 	 */
-	public int addEmpleado(empleadoDTO empleado) {
+	@Override
+	public int add(empleadoDTO item) {
 		PreparedStatement ps = null;
 		Connection conn = null;
 
@@ -60,9 +61,9 @@ public class EmpleadoDAO implements GeneralDAO{
 
 			sql.append("INSERT INTO empleado").append("(nombre, apellido, rol)").append(" VALUES ");
 			sql.append("(");
-			sql.append(empleado.getNombre()).append(", ");
-			sql.append(empleado.getApellido()).append(", ");
-			sql.append(empleado.getRol()).append(");  ");
+			sql.append(item.getNombre()).append(", ");
+			sql.append(item.getApellido()).append(", ");
+			sql.append(item.getRol()).append(");  ");
 
 			/**
 			 * Este sector devera ser remplazado por el uso de un FACTORY que nos
@@ -74,7 +75,7 @@ public class EmpleadoDAO implements GeneralDAO{
 			return ps.executeUpdate();
 		} catch (SQLException ex) {
 			LOG.log(Level.SEVERE,
-					"INDICE CON ERROR:".concat(String.valueOf(empleado.getId())).concat(" - TABLA: EMPLEDO"), ex);
+					"INDICE CON ERROR:".concat(String.valueOf(item.getId())).concat(" - TABLA: EMPLEDO"), ex);
 		} finally {
 			try {
 				ps.close();
@@ -105,7 +106,8 @@ public class EmpleadoDAO implements GeneralDAO{
 	 * @return 0 = si no pudo cargar los datos >1 = si pudo cargar los dato y
 	 *         cuantos
 	 */
-	public int addEmpleado(LinkedList<empleadoDTO> lista) {
+	@Override
+	public int add(LinkedList<empleadoDTO> lista) {
 		PreparedStatement ps = null;
 		Connection conn = null;
 
@@ -143,7 +145,8 @@ public class EmpleadoDAO implements GeneralDAO{
 	 * @param aBorrar objeto de tipo {@link dto.empleadoDTO} a impactar en el DB
 	 * @return -1 = si no pudo borrar ningun dato 1 = si pudo borrar los dato
 	 */
-	public int borrar(empleadoDTO aBorrar) {
+	@Override
+	public int delete(empleadoDTO aBorrar) {
 		PreparedStatement ps = null;
 		Connection conn = null;
 
@@ -178,7 +181,8 @@ public class EmpleadoDAO implements GeneralDAO{
 	 * @return 0 = si no pudo cargar los datos >1 = si pudo borrar los dato y
 	 *         cuantos
 	 */
-	public int borrar(LinkedList<empleadoDTO> aBorrar) {
+	@Override
+	public int delete(LinkedList<empleadoDTO> aBorrar) {
 		PreparedStatement ps = null;
 		Connection conn = null;
 
@@ -220,6 +224,7 @@ public class EmpleadoDAO implements GeneralDAO{
 	 *                 empleados del tipo {@link dto.empleadoDTO}
 	 * @return 0 = si no pudo modificar los datos 1 = si pudo modificar los dato
 	 */
+	@Override
 	public int update(empleadoDTO registro) {
 		PreparedStatement ps = null;
 		Connection conn = null;
@@ -264,6 +269,7 @@ public class EmpleadoDAO implements GeneralDAO{
 	 * @return -1 = si no pudo modificar los datos >1 = si pudo modificar los dato y
 	 *         cuantos
 	 */
+	@Override
 	public int update(LinkedList<empleadoDTO> registro) {
 		PreparedStatement ps = null;
 		Connection conn = null;
@@ -308,6 +314,7 @@ public class EmpleadoDAO implements GeneralDAO{
 	 *         {@link dto.empleadoDTO} que representasn todos los registro en la DB
 	 *         de empleados
 	 */
+	@Override
 	public LinkedList<empleadoDTO> getAll() {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -343,6 +350,7 @@ public class EmpleadoDAO implements GeneralDAO{
 	 * @return objeto de la clase {@link dto.empleadoDTO} representando un registro
 	 *         de la DB
 	 */
+	@Override
 	public empleadoDTO getEmpleado(int id) {
 		Connection conn = null;
 		PreparedStatement ps = null;
