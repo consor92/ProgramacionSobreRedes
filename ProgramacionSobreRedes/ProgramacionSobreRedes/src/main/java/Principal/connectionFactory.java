@@ -30,6 +30,16 @@ public class connectionFactory {
 
 	}
 
+	public static connectionFactory getInstance()
+	{
+		if( fabrica == null)
+		{
+			fabrica = new connectionFactory();
+		}
+			
+		return fabrica;
+	}
+	
 	/**
 	 * Aca bemos el claro funcionamiento del FACTORY, donde un metodo instancia un
 	 * objeto de si mismo, para luego devolver tantas instancias de como sean
