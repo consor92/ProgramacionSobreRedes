@@ -13,16 +13,6 @@ import java.sql.SQLException;
  *
  */
 public class connectionFactory {
-	private String driver = "com.mysql.cj.jdbc.Driver";
-
-	private String db = "/usuarios";
-	private String port = "3306";
-	private String EngineDB = "mysql";
-	private String ip = "://localhost";
-
-	private String url = "jdbc:".concat(EngineDB).concat(ip).concat(port).concat(db);
-	private String user = "root";
-	private String pass = "";
 
 	/**
 	 * No es extrictamente necesario que lleve el static de si mismo esto es una
@@ -37,12 +27,7 @@ public class connectionFactory {
 	 * El constructor tiene la peculiaridad de ser PRIVADO en el ambos patrones.
 	 */
 	private connectionFactory() {
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
 	/**
@@ -56,12 +41,18 @@ public class connectionFactory {
 	 * @return
 	 */
 	// public synchronized static ConnectionFactory getInstance() {
-	public Connection getConection() {
-		try {
-			conn = DriverManager.getConnection(url, user, pass);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public Connection getConection(MotorDB db) {
+
+		switch (db) {
+		case MySQL:
+				MySQL sql = new MySQL();
+				conn = sql.getConnection();
+			break;
+
+		case Mongo:
+				Mongo mong = new Mongo();
+				conn = mong.getConnection();
+			break;
 		}
 
 		return conn;
@@ -74,15 +65,67 @@ public class connectionFactory {
 	 * 
 	 * @return
 	 */
-	public Connection getConectionSinglentos() {
-		if (conn == null)
-			try {
-				conn = DriverManager.getConnection(url, user, pass);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	/*
+	 * public Connection getConectionSinglentos() { if (conn == null) try { conn =
+	 * DriverManager.getConnection(url, user, pass); } catch (SQLException e) { //
+	 * TODO Auto-generated catch block e.printStackTrace(); } return conn; }
+	 */
+}
+
+class Mongo {
+	
+	public Mongo() {
+		
+	}
+	
+	public Connection getConnection() {
+		return null;
+	}
+}
+
+// clases anonimas
+class MySQL {
+	private String driver = "com.mysql.cj.jdbc.Driver";
+
+	private String db = "/usuarios";
+	private String port = "3306";
+	private String EngineDB = "mysql";
+	private String ip = "://localhost";
+
+	private String url = "jdbc:".concat(EngineDB).concat(ip).concat(port).concat(db);
+	private String user = "root";
+	private String pass = "";
+
+	Connection conn = null;
+
+	public MySQL() {
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public Connection getConnection() {
+
+		try {
+			conn = DriverManager.getConnection(url, user, pass);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return conn;
+	}
+
+	public void close() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
