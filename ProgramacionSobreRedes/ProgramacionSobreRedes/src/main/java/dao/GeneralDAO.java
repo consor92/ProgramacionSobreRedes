@@ -1,6 +1,6 @@
 package dao;
 
-public class GeneralDAO {
+public interface GeneralDAO {
 	
 	
 	

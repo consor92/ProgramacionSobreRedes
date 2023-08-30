@@ -24,7 +24,7 @@ import dto.empleadoDTO;
  *         Al final de estos metodos clasicos se generan los especificos para
  *         consultas con parametros punales.
  */
-public class EmpleadoDAO {
+public class EmpleadoDAO implements GeneralDAO{
 
 	/**
 	 * El LOG lo usaremos para mostrar los errores por pantalla en vez del

@@ -4,6 +4,9 @@ public class daoFactory {
 
 	private static daoFactory fabrica = null;
 
+	private static EmpleadoDAO empleado = null;
+	private static RrhhDAO rrhh = null;
+
 	private daoFactory() {
 
 	}
@@ -18,14 +21,18 @@ public class daoFactory {
 	public GeneralDAO getDAO(tabla type) {
 		switch (type) {
 		case EMPLEADO:
+			if (empleado == null)
+				empleado = new EmpleadoDAO();
 
-			break;
+			return empleado;
 		case RRHH:
+			if (rrhh == null)
+				rrhh = new RrhhDAO();
 
-			break;
+			return empleado;
 		}
 
-		return 
+		return null;
 	}
 
 }
