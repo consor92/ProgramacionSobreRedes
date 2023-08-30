@@ -1,9 +1,8 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.util.LinkedList;
+
 
 public interface GeneralDAO<T> {
 	
@@ -22,9 +21,6 @@ public interface GeneralDAO<T> {
 	public LinkedList<T> getAll();
 
 	public T getEmpleado(int id);
-
-	private void cerrarConexiones(ResultSet rs, PreparedStatement ps, Connection conn) {
-	}
 
 	
 	
