@@ -1,0 +1,9 @@
+package dao;
+
+import dto.rrhhDTO;
+
+public class RrhhDAO implements GeneralDAO<rrhhDTO> {
+
+	
+	
+}

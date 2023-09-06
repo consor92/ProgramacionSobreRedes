@@ -1,0 +1,17 @@
+package dao;
+
+public class daoFactory {
+
+	private static daoFactory
+	
+	private daoFactory()
+	{
+		
+	}
+	
+	public static daoFactory getInstance()
+	{
+		
+	}
+	
+}

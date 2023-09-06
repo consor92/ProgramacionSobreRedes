@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="dao.ConectionFactory"/>
+    <fullyQualifiedTypeName name="Principal.ConnectionFactory"/>
+    <fullyQualifiedTypeName name="java.io.PrintStream"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collector"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="dto.generalDTO"/>
+    <fullyQualifiedTypeName name="dto.DTOfactory"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.logging.Level"/>
+    <fullyQualifiedTypeName name="java.util.logging.Logger"/>
+    <fullyQualifiedTypeName name="dao.tabla"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="com.mysql.cj.protocol.a.MysqlBinaryValueDecoder"/>
+    <fullyQualifiedTypeName name="Principal.MySQL"/>
+    <fullyQualifiedTypeName name="Principal.Mongo"/>
+    <fullyQualifiedTypeName name="Principal.connectionFactory"/>
+    <fullyQualifiedTypeName name="dao.EmpleadoDAO"/>
+    <fullyQualifiedTypeName name="dao.GeneralDAO"/>
+    <fullyQualifiedTypeName name="dto.empleadoDTO"/>
+    <fullyQualifiedTypeName name="dto.rrhhDTO"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="javax.enterprise.inject.Default"/>
+    <fullyQualifiedTypeName name="dao.daoFactory"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
+    <fullyQualifiedTypeName name="dto.tabla"/>
+</qualifiedTypeNameHistroy>

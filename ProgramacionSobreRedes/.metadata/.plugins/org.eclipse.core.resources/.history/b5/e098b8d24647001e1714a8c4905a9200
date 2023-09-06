@@ -1,0 +1,57 @@
+package dao;
+
+import java.util.LinkedList;
+
+import dto.empleadoDTO;
+
+public class RrhhDAO implements GeneralDAO {
+
+	@Override
+	public int add(empleadoDTO empleado) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int add(LinkedList<empleadoDTO> lista) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int borrar(empleadoDTO aBorrar) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int borrar(LinkedList<empleadoDTO> aBorrar) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int update(empleadoDTO registro) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int update(LinkedList<empleadoDTO> registro) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public LinkedList<empleadoDTO> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public empleadoDTO getEmpleado(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

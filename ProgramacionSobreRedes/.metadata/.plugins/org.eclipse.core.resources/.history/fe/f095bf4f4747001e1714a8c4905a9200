@@ -1,0 +1,32 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.LinkedList;
+
+import dto.empleadoDTO;
+
+public interface GeneralDAO<T> {
+
+	public int add( T empleado);
+
+	public int add(LinkedList<empleadoDTO> lista);
+
+	public int delete(empleadoDTO aBorrar) ;
+
+	public int delete(LinkedList<empleadoDTO> aBorrar);
+
+	public int update(empleadoDTO registro) ;
+
+	public int update(LinkedList<empleadoDTO> registro) ;
+
+	public LinkedList<empleadoDTO> getAll();
+
+	public empleadoDTO getEmpleado(int id);
+
+	private void cerrarConexiones(ResultSet rs, PreparedStatement ps, Connection conn) ;
+
+	
+	
+}
