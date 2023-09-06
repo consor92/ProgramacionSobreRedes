@@ -1,9 +1,9 @@
 package Principal;
 
 import dao.EmpleadoDAO;
+import dao.daoFactory;
 import dto.DTOfactory;
 import dto.empleadoDTO;
-import dao.tabla;
 
 public class main {
 
@@ -15,8 +15,7 @@ public class main {
 		
 		EmpleadoDAO datos = new EmpleadoDAO();
 		
-		datos.addEmpleado( (empleadoDTO)DTOfactory.getInstance().getDTO(tabla.EMPLEADO) );
-		
+		//datos.addEmpleado( (empleadoDTO)DTOfactory.getInstance().getDTO(tabla.EMPLEADO) );
 	}
 
 }

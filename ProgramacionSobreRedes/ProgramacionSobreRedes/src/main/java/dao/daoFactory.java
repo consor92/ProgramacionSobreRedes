@@ -1,5 +1,7 @@
 package dao;
 
+import dto.tabla;
+
 public class daoFactory {
 
 	private static daoFactory fabrica = null;

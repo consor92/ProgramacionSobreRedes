@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import dto.DTOfactory;
 import dto.empleadoDTO;
+import dto.tabla;
 
 /**
  * 
