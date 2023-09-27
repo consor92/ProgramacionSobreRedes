@@ -1,4 +1,4 @@
-package Socket;
+package SocketUDP_milticast;
 
 public class main {
 
