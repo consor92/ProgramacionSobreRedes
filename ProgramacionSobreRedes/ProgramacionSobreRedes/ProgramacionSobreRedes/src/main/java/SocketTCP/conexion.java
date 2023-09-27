@@ -34,7 +34,6 @@ public class conexion {
 
 		try {
 			if (tipo.equals("cliente")) {
-				servSock = null;
 				sock = new Socket(IP, port);
 			} else if (tipo.equals("servidor")) {
 				servSock = new ServerSocket(port);
@@ -44,4 +43,13 @@ public class conexion {
 			e.printStackTrace();
 		}
 	}
+
+	public InetAddress getIP() {
+		return IP;
+	}
+
+	public int getPort() {
+		return port;
+	}
+	
 }

@@ -1,63 +1,64 @@
 package SocketTCP;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class servidor extends conexion {
 
-	InputStreamReader isrServ = null;
-	BufferedReader read = null;
-	
+	DataInputStream disSer = null;
+
 	public servidor() {
 		super("servidor");
 	}
 
-	public void serverOn()
-	{
+	@SuppressWarnings("deprecation")
+	public void serverOn() {
 		try {
 			ps.println("Esperando a un cliente ...");
-			
-			//congela programa
+
+			// congela programa
 			sock = servSock.accept();
-			
-			ps.println( "IP: " + sock.getInetAddress().getHostAddress() +
-						"Nombre: " + sock.getInetAddress().getHostName() +
-						"Port: " + sock.getPort() + "\n"
-					  );
-			
-			dosSer = new DataOutputStream( sock.getOutputStream() );
-			isrServ = new InputStreamReader( sock.getInputStream() );
-			read = new BufferedReader( isrServ );
-			
+			ps.println(
+					"IP: " + sock.getInetAddress().getHostAddress() + "\nNombre: " + sock.getInetAddress().getHostName()
+							+ "\nPort: " + sock.getPort() + "\nPort Local: " + sock.getLocalPort() + "\n");
+
+			dosSer = new DataOutputStream(sock.getOutputStream());
+			disSer = new DataInputStream(sock.getInputStream());
+
 			ps.println("Cliente conectado con exito :) !!!");
-			
+
 			ps.println("Esperando mensaje del cliente ...");
-			
-			while(  (msg = read.readLine()) != null )
-			{
-				//aca recibi un mensaje seguro
-				ps.println( msg );
-				
-				dosSer.writeUTF("ok");
-				dosSer.flush();
+
+			while (true) {
+				ps.println("--" + disSer.readUTF());
 			}
-			
+			/*
+			 * while( (msg = read.readLine()) != null ) { //aca recibi un mensaje seguro
+			 * ps.println( "mensaje recibido: " + msg );
+			 * 
+			 * dosSer.writeUTF("quiero !"); dosSer.flush(); }
+			 */
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				sock.close();
-				read.close();
-				isrServ.close();
-				dosSer.close();	
-				servSock.close();				
+
+				
+
+				if (disSer != null)
+					disSer.close();
+
+				dosSer.close();
+				servSock.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
+
 }
