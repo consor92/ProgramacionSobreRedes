@@ -1,10 +1,8 @@
 package SocketTCP;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class servidor extends conexion {
 
@@ -19,38 +17,39 @@ public class servidor extends conexion {
 		try {
 			ps.println("Esperando a un cliente ...");
 
-			// congela programa
+			// congela programa (thread)
 			sock = servSock.accept();
 			ps.println(
 					"IP: " + sock.getInetAddress().getHostAddress() + "\nNombre: " + sock.getInetAddress().getHostName()
 							+ "\nPort: " + sock.getPort() + "\nPort Local: " + sock.getLocalPort() + "\n");
 
 			dosSer = new DataOutputStream(sock.getOutputStream());
-			disSer = new DataInputStream(sock.getInputStream());
+			disSer = new DataInputStream( sock.getInputStream());
 
 			ps.println("Cliente conectado con exito :) !!!");
+			ps.println("Esperando mensaje del cliente ..." );
 
-			ps.println("Esperando mensaje del cliente ...");
-
+			// congela programa (thread)
 			while (true) {
-				ps.println("--" + disSer.readUTF());
+				msg = disSer.readUTF();
+				if(msg.equals("/exit"))
+				{
+					ps.println("cliente desconectado");
+					break;
+				}
+					
+				ps.println("--" + msg);
 				dosSer.writeUTF("el envido esta primero");
 				dosSer.writeUTF("REEE TRUCO");
+				dosSer.flush();
 			}
-			/*
-			 * while( (msg = read.readLine()) != null ) { //aca recibi un mensaje seguro
-			 * ps.println( "mensaje recibido: " + msg );
-			 * 
-			 * dosSer.writeUTF("quiero !"); dosSer.flush(); }
-			 */
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				sock.close();
-
 				
-
 				if (disSer != null)
 					disSer.close();
 
