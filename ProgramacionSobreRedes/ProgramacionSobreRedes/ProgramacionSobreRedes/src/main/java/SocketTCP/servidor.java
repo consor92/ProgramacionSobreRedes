@@ -34,6 +34,8 @@ public class servidor extends conexion {
 
 			while (true) {
 				ps.println("--" + disSer.readUTF());
+				dosSer.writeUTF("el envido esta primero");
+				dosSer.writeUTF("REEE TRUCO");
 			}
 			/*
 			 * while( (msg = read.readLine()) != null ) { //aca recibi un mensaje seguro
