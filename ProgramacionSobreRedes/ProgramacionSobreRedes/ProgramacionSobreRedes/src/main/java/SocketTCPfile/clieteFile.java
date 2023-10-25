@@ -28,9 +28,7 @@ public class clieteFile extends conexion {
 	public void clienteOn() {
 		try {
 			
-			sock.setSoTimeout( 30000 );
-			sock.setKeepAlive(true);
-			sock.setSoLinger(true, 5 );
+
 			
 			ps.println("Cliente conectado con: " 
 					  + sock.getInetAddress().getHostAddress()
@@ -71,12 +69,18 @@ public class clieteFile extends conexion {
 				Thread.sleep(200);
 
 				// transformamos un FILE en un cunjuto de byte
-				byte b[] = new byte[(int) archivo.length()];
-				buff.read(b);
-
+				//aca mandamos todo el archivo de golpe
+					/*byte b[] = new byte[(int) archivo.length()];
+									
+					buff.read(b);
+					buffCli.write(b);
+					*/
+				//aca dividimos el arvhivos en partes mas chicas antes de enviarlo
 				// envio de byte paso a paso
-				for (int i = 0; i < b.length; i++) {
-					buffCli.write(b[i]);
+				byte c[] = new byte[8192];
+				int in = 0;
+				while ((in = buff.read(c)) != -1){
+					buffCli.write(c,0,in);
 				}
 
 				Thread.sleep(500);
@@ -86,7 +90,6 @@ public class clieteFile extends conexion {
 						+ " se ha envio exitosamente."
 						+ conexion.ANSI_RESET);
 				
-				b = null;
 			} else {
 				ps.println(conexion.ANSI_PURPLE + "Archivo inexistente." + conexion.ANSI_RESET);
 			}
